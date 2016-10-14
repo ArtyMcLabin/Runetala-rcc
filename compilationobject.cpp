@@ -30,56 +30,55 @@
  *
  */
 
-#ifndef ENGINE_H
-#define ENGINE_H
-
-#include<iostream>
-#include<fstream>
-#include<algorithm>
-#include"compilationobject.h"
-
-#ifdef ON_WINDOWS
-	#include<conio.h>
-#elif defined(ON_UNIX)
-	#include<unistd.h>
-#endif
-
-using namespace std;
-
-//debug macros
-#define D(X) cerr << X << endl;
-#define PRE  cerr << "PRE" << endl;
-#define POST cerr << "POST" << endl;
+#include "compilationobject.h"
 
 
-class CompilationObject;
-
-namespace engine
+bool CompilationObject::isDotRuneFile(string filename)
 {
-
-	extern string custom_cpp_params;
-
-	extern bool flag_verbose;
-		#define VERBOSE(X) if(engine::flag_verbose) X;
-
-	void abort(string message, int error_code);
-	int tryCompile(CompilationObject *co);
-	void askToRun(string path_to_exe);
-
-	void ensureDir(string dir);
-	string withFrontSlashes(string path); //replace microsoft directory backslashes with valid.
-	string withBackSlashes(string path); //replace valid directory slashes with microsoft backslashes.
-
-
-	//private functions (for use by engine:: functions)
-	namespace privates
-	{
-		//- string getBinaryExtensionName(string filename);
-
-		int generateCpp(CompilationObject *co);
-		int compile(CompilationObject* co);
-	}
-
+	return (filename.substr(filename.find_last_of("."))) == ".rune";
 }
 
-#endif // ENGINE_H
+
+
+string CompilationObject::withoutPath(string filename)
+{
+	return (filename.substr(filename.find_last_of("/")+1));
+}
+
+string CompilationObject::pathOnly(string filename)
+{
+	return (filename.substr(0,filename.find_last_of("/")+1));
+}
+
+
+CompilationObject::CompilationObject(string _path_to_rune)
+{
+	//check ".rune" format
+	if(!isDotRuneFile(_path_to_rune)){
+		cerr << "couldn't open \"" << _path_to_rune << "\"" << endl;
+		throw this;
+	}
+
+	//check file is available (exists, visible etc..)
+	ifstream source(_path_to_rune);
+	if(!source){
+		cerr << "\"" << _path_to_rune << "\" unavailable" << endl;
+		throw this;
+	}else{
+		VERBOSE(cout << "opened \"" << _path_to_rune << "\"" << endl;)
+		path_to_rune = _path_to_rune;
+	}
+
+	//get name
+	string without_path = withoutPath(path_to_rune);
+	name = without_path.substr(0,without_path.find_last_of("."));
+
+	//get root path
+	path_root = pathOnly(path_to_rune);
+
+	//get path to ".cpp" (getting created later)
+	path_to_cpp = path_root+BUILD_CPP_DIR+name+".cpp";
+
+	//get path to executable (getting created later)
+	path_to_exe = path_root+BUILD_EXE_DIR+name+EXECUTABLE_EXTENSION;
+}

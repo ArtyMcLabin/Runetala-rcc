@@ -30,11 +30,23 @@
  *
  */
 
+/* Project Glossary:
+ *	//+		add
+ *	//-		remove
+ *	//#		fix
+ *	//!		very important (on short term)
+ *	//?		non checked as working / needed yet
+ *	//%		potential bug in future
+ *	//@		implement error handling
+ *	rome overload : all overloads lead to rome
+ */
+
 #include<iostream>
 #include<fstream>
 
 
 #include"engine.h"
+#include"compilationobject.h"
 
 using namespace std;
 using namespace engine;
@@ -45,11 +57,20 @@ int main(int argc, char *argv[])
 		abort("please supply input file.",-1);
 	}
 
-	string current_filename = withFrontSlashes(argv[1]);
-	tryCompile(current_filename); //@
+	CompilationObject* co;
+	try{
+#ifdef ON_WINDOWS
+	co = new CompilationObject(withFrontSlashes(argv[1]));
+#elif defined(ON_UNIX)
+	co = new CompilationObject(argv[1]);
+#endif
+	}catch(CompilationObject*){ // constructor failure
+		return -1;
+	}
 
+	tryCompile(co); //@
 
-	askToRun(current_filename); //will calculate executable name inside
+	askToRun(co->path_to_exe);
 
 
 	cout << endl;

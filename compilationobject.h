@@ -30,56 +30,33 @@
  *
  */
 
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef COMPILATIONOBJECT_H
+#define COMPILATIONOBJECT_H
 
 #include<iostream>
 #include<fstream>
-#include<algorithm>
-#include"compilationobject.h"
-
-#ifdef ON_WINDOWS
-	#include<conio.h>
-#elif defined(ON_UNIX)
-	#include<unistd.h>
-#endif
+#include"engine.h"
 
 using namespace std;
-
-//debug macros
-#define D(X) cerr << X << endl;
-#define PRE  cerr << "PRE" << endl;
-#define POST cerr << "POST" << endl;
+#define BUILD_CPP_DIR "build/cpp/"
+#define BUILD_EXE_DIR ""
 
 
-class CompilationObject;
-
-namespace engine
+struct CompilationObject
 {
+	string name; //ex: "georg"
+	string path_to_rune; //ex: "test/georg.rune"
+	string path_to_cpp; //ex: "test/build/cpp/georg.cpp"
+	string path_to_exe; //ex: "test/georg"
+	string path_root; //ex: "test/"
 
-	extern string custom_cpp_params;
+	CompilationObject(string _path_to_rune);
 
-	extern bool flag_verbose;
-		#define VERBOSE(X) if(engine::flag_verbose) X;
+private:
+	static bool isDotRuneFile(string filename);
+	static string withoutPath(string filename);
+	static string pathOnly(string filename);
 
-	void abort(string message, int error_code);
-	int tryCompile(CompilationObject *co);
-	void askToRun(string path_to_exe);
+};
 
-	void ensureDir(string dir);
-	string withFrontSlashes(string path); //replace microsoft directory backslashes with valid.
-	string withBackSlashes(string path); //replace valid directory slashes with microsoft backslashes.
-
-
-	//private functions (for use by engine:: functions)
-	namespace privates
-	{
-		//- string getBinaryExtensionName(string filename);
-
-		int generateCpp(CompilationObject *co);
-		int compile(CompilationObject* co);
-	}
-
-}
-
-#endif // ENGINE_H
+#endif // COMPILATIONOBJECT_H

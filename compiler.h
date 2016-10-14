@@ -33,6 +33,15 @@
 #ifndef COMPILER_H
 #define COMPILER_H
 
+/* runes glossary:
+ *
+ * R: repeat (loop)
+ * I: input
+ * O: output
+ * X: variable
+ *
+ *
+ */
 
 namespace compiler
 {

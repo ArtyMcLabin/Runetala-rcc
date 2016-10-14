@@ -7,21 +7,26 @@ CONFIG += c++1z
 
 SOURCES += main.cpp \
     engine.cpp \
-    compiler.cpp
+    compiler.cpp \
+    compilationobject.cpp
 
 HEADERS += \
     engine.h \
-    compiler.h
+    compiler.h \
+    compilationobject.h
 
 
 win32{
     DEFINES += ON_WINDOWS \
-        #"CPP_COMPILER_SETTING=\\\"g++ \\-std\\=c++1z\\\""
+        "CPP_COMPILER_SETTING=\\\"g++\\ -std=c++1z\\ -static-libgcc\\ -static-libstdc++\\ -static\\\"" \
+        "EXECUTABLE_EXTENSION=\\\".exe\\\""
 }
+
 
 unix{
     DEFINES += ON_UNIX \
-        #"CPP_COMPILER_SETTING=g++ -std=c++1z"
+        "CPP_COMPILER_SETTING=\\\"g++\\ -std=c++1z\\ -static-libgcc\\ -static-libstdc++\\ -static\\\"" \
+        "EXECUTABLE_EXTENSION=\\\"\\\""
 }
 
 
