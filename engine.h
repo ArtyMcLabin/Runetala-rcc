@@ -36,7 +36,9 @@
 #include<iostream>
 #include<fstream>
 #include<algorithm>
-#include"compilationobject.h"
+#include"CompilationObject.h"
+#include"ChronicsFile.h"
+#include"compiler.h"
 
 #ifdef ON_WINDOWS
 	#include<conio.h>
@@ -53,31 +55,39 @@ using namespace std;
 
 
 class CompilationObject;
+class ChronicsFile;
 
 namespace engine
 {
-
+	extern vector<CompilationObject*> cobjects;
+	extern vector<ChronicsFile*> dot_chr_files;
 	extern string custom_cpp_params;
-
 	extern bool flag_verbose;
 		#define VERBOSE(X) if(engine::flag_verbose) X;
 
 	void abort(string message, int error_code);
-	int tryCompile(CompilationObject *co);
+	void parseArgs(vector<string> &args);
+	int tryCompile(CompilationObject *co); //@
 	void askToRun(string path_to_exe);
 
+	//file works
 	void ensureDir(string dir);
 	string withFrontSlashes(string path); //replace microsoft directory backslashes with valid.
-	string withBackSlashes(string path); //replace valid directory slashes with microsoft backslashes.
+	string withoutPath(string filename);
+	string pathOnly(string filename);
 
+	#ifdef ON_WINDOWS
+	string withBackSlashes(string path); //replace valid directory slashes with microsoft backslashes.
+	#elif defined ON_UNIX
+	#endif
+
+	char getChar(); //crossplatform getch()
 
 	//private functions (for use by engine:: functions)
 	namespace privates
 	{
-		//- string getBinaryExtensionName(string filename);
-
-		int generateCpp(CompilationObject *co);
-		int compile(CompilationObject* co);
+		int generateCpp(CompilationObject *co); // Runetala -> C++
+		int compile(CompilationObject* co); // C++ -> machine code
 	}
 
 }

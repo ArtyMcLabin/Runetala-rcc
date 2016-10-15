@@ -33,19 +33,32 @@
 #ifndef COMPILER_H
 #define COMPILER_H
 
-/* runes glossary:
- *
- * R: repeat (loop)
- * I: input
- * O: output
- * X: variable
- *
- *
- */
+#include<iostream>
+#include<fstream>
+#include<map>
+#include"runes/Rune_X.h"
+#include"runes/Rune_C.h"
+#include"runes/Rune_I.h"
+#include"runes/Rune_O.h"
+#include"runes/Rune_A.h"
+#include"runes/Rune_N.h"
+#include"runes/Rune_R.h"
+#include"runes/Rune_L.h"
+
+
+
+
+using namespace std;
+
 
 namespace compiler
 {
+	extern vector<runetala::Rune_X> X_runes;
+	extern vector<runetala::Rune_C> C_runes;
+	extern vector<runetala::Rune_L> L_runes;
 
+
+	void translate(ifstream &src, ofstream &cpp); //Runetala->C++
 }
 
 #endif // COMPILER_H
