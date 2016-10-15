@@ -43,10 +43,11 @@
 
 #include<iostream>
 #include<fstream>
-
+#include<vector>
 
 #include"engine.h"
-#include"compilationobject.h"
+#include"CompilationObject.h"
+#include"ChronicsFile.h"
 
 using namespace std;
 using namespace engine;
@@ -54,23 +55,22 @@ using namespace engine;
 int main(int argc, char *argv[])
 {
 	if(argc==1){
-		abort("please supply input file.",-1);
+		abort("please supply input file/s.",-1);
 	}
 
-	CompilationObject* co;
-	try{
-#ifdef ON_WINDOWS
-	co = new CompilationObject(withFrontSlashes(argv[1]));
-#elif defined(ON_UNIX)
-	co = new CompilationObject(argv[1]);
-#endif
-	}catch(CompilationObject*){ // constructor failure
-		return -1;
+	vector<string> args;
+	args.assign(argv+1,argv+argc); //all args except program name (argv[0])
+
+	parseArgs(args);
+
+
+	for(CompilationObject* co : cobjects){ //compile all source files
+		tryCompile(co);
+		askToRun(co->path_to_exe);
 	}
 
-	tryCompile(co); //@
 
-	askToRun(co->path_to_exe);
+
 
 
 	cout << endl;

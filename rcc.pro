@@ -8,12 +8,42 @@ CONFIG += c++1z
 SOURCES += main.cpp \
     engine.cpp \
     compiler.cpp \
-    compilationobject.cpp
+    CompilationObject.cpp \
+    runes/Rune_X.cpp \
+    runes/Rune_C.cpp \
+    runes/Rune_A.cpp \
+    runes/Rune_N.cpp \
+    runes/Rune_I.cpp \
+    runes/Rune_O.cpp \
+    runes/Rune_R.cpp \
+    runes/Rune_L.cpp \
+    rune_common.cpp \
+    ChronicsFile.cpp \
+    Runic_Inscription.cpp \
+    runetala.cpp \
+    runes/Data_Rune.cpp \
+    runes/Action_Rune.cpp \
+    runes/Param_Rune.cpp
 
 HEADERS += \
     engine.h \
     compiler.h \
-    compilationobject.h
+    CompilationObject.h \
+    runes/Rune_X.h \
+    runes/Rune_C.h \
+    runes/Rune_A.h \
+    runes/Rune_N.h \
+    runes/Rune_I.h \
+    runes/Rune_O.h \
+    runes/Rune_R.h \
+    runes/Rune_L.h \
+    rune_common.h \
+    ChronicsFile.h \
+    Runic_Inscription.h \
+    runetala.h \
+    runes/Data_Rune.h \
+    runes/Action_Rune.h \
+    runes/Param_Rune.h
 
 
 win32{

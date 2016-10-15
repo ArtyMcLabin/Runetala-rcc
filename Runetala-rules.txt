@@ -1,0 +1,13 @@
+)inscriptions are always processed left to right
+)sub-inscriptions start at (row+1,column+1) of last letter of parent inscription
+)sub-inscriptions are always processed before inscription right to their parent (next on parent level)
+	)"south-east before east before north-west" rule
+
+
+example of imperativity order:
+
+1
+ 2--4--13--------14-15 
+  3  5---------11     16
+      6---9-10  12
+       7-8 
