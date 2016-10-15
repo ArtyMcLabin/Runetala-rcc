@@ -32,3 +32,13 @@
 
 #include "compiler.h"
 
+
+void compiler::translate(ifstream& src, ofstream& cpp)
+{
+	(void)src; //-
+	(void)cpp; //-
+
+
+
+}
+

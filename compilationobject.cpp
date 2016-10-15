@@ -30,32 +30,16 @@
  *
  */
 
-#include "compilationobject.h"
+#include "CompilationObject.h"
 
 
-bool CompilationObject::isDotRuneFile(string filename)
-{
-	return (filename.substr(filename.find_last_of("."))) == ".rune";
-}
-
-
-
-string CompilationObject::withoutPath(string filename)
-{
-	return (filename.substr(filename.find_last_of("/")+1));
-}
-
-string CompilationObject::pathOnly(string filename)
-{
-	return (filename.substr(0,filename.find_last_of("/")+1));
-}
 
 
 CompilationObject::CompilationObject(string _path_to_rune)
 {
 	//check ".rune" format
 	if(!isDotRuneFile(_path_to_rune)){
-		cerr << "couldn't open \"" << _path_to_rune << "\"" << endl;
+		cerr << "\"" << _path_to_rune << "\" is not a \".rune\" file" << endl;
 		throw this;
 	}
 
@@ -70,15 +54,20 @@ CompilationObject::CompilationObject(string _path_to_rune)
 	}
 
 	//get name
-	string without_path = withoutPath(path_to_rune);
+        string without_path = engine::withoutPath(path_to_rune);
 	name = without_path.substr(0,without_path.find_last_of("."));
 
 	//get root path
-	path_root = pathOnly(path_to_rune);
+        path_root = engine::pathOnly(path_to_rune);
 
 	//get path to ".cpp" (getting created later)
 	path_to_cpp = path_root+BUILD_CPP_DIR+name+".cpp";
 
 	//get path to executable (getting created later)
 	path_to_exe = path_root+BUILD_EXE_DIR+name+EXECUTABLE_EXTENSION;
+}
+
+bool CompilationObject::isDotRuneFile(string filename)
+{
+    return (filename.substr(filename.find_last_of("."))) == ".rune";
 }

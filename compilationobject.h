@@ -38,6 +38,7 @@
 #include"engine.h"
 
 using namespace std;
+
 #define BUILD_CPP_DIR "build/cpp/"
 #define BUILD_EXE_DIR ""
 
@@ -52,11 +53,7 @@ struct CompilationObject
 
 	CompilationObject(string _path_to_rune);
 
-private:
 	static bool isDotRuneFile(string filename);
-	static string withoutPath(string filename);
-	static string pathOnly(string filename);
-
 };
 
 #endif // COMPILATIONOBJECT_H
