@@ -35,6 +35,7 @@
 
 #include"rune_common.h"
 
+//abstract class
 class runetala::Param_Rune
 {
 

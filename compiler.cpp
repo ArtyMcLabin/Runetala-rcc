@@ -30,15 +30,60 @@
  *
  */
 
-#include "compiler.h"
+#include "Compiler.h"
 
 
-void compiler::translate(ifstream& src, ofstream& cpp)
+Compiler::Compiler(ifstream &_src, ofstream &_cpp)
 {
-	(void)src; //-
-	(void)cpp; //-
+    src=&_src;
+    cpp=&_cpp;
+}
 
+void Compiler::loadChronic(ifstream &chronic, string filename)
+{
+    string buffer;
 
+    if(chronic.eof()){
+        VERBOSE(cout << "done loading chronic \"" << filename << "\"." << endl;)
+        return;
+    }
+    getline(chronic,buffer);
+
+    switch(buffer[0])
+    {
+        case ';': //comment line
+            break;
+        case 'X':
+            {
+                Rune_X x;
+                x.size = buffer[1]-'0'; //+ add support for sizes above 1-9 range //@ size==0 bad case
+                x.name = buffer.substr(2);
+                x.value = buffer.substr(buffer.find(" ")).find_first_not_of(" ");
+                X_runes.push_back(x);
+                break;
+            }
+        case 'C':
+            {
+                Rune_C c;
+                c.size = buffer[1]-'0'; //+ add support for sizes above 1-9 range //@ size==0 bad case
+                c.name = buffer.substr(2,buffer.find(" "));
+                c.value = buffer.substr(buffer.find(" ")).find_first_not_of(" ");
+                C_runes.push_back(c);
+                break;
+            }
+        case 'L':
+            //+
+            break;
+        default:
+            cerr << "in " << filename << ":" << endl
+                 << "\t"  << "no rune \"" << buffer[0] << "\" defined in Runetala." << endl;
+    }
 
 }
 
+void Compiler::translate()
+{
+    for(runetala::Runic_Inscription inscription : inscriptions){
+        (*cpp) << inscription.translate();
+    }
+}

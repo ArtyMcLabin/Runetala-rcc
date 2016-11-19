@@ -41,10 +41,15 @@
  *	rome overload : all overloads lead to rome
  */
 
+/* Notes:
+ *  "pseudo_compiled" folder contains files for pseudo compilation. (that are getting compiled with the Runetala output cpp).
+ */
+
 #include<iostream>
 #include<fstream>
 #include<vector>
 
+#include"settings.h"
 #include"engine.h"
 #include"CompilationObject.h"
 #include"ChronicsFile.h"
@@ -52,11 +57,15 @@
 using namespace std;
 using namespace engine;
 
+bool settings::flag_verbose;
+
 int main(int argc, char *argv[])
 {
 	if(argc==1){
 		abort("please supply input file/s.",-1);
 	}
+
+	settings::flag_verbose = true; //-
 
 	vector<string> args;
 	args.assign(argv+1,argv+argc); //all args except program name (argv[0])

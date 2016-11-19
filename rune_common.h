@@ -38,6 +38,9 @@
 
 typedef char Byte;
 
-Byte* toBytes(void* x);
+template<typename T>
+Byte* toBytes(T* x){
+	return static_cast<Byte*>(x);
+}
 
 #endif // RUNE_COMMON_H

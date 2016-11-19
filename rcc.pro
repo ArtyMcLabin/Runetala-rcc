@@ -7,7 +7,6 @@ CONFIG += c++1z
 
 SOURCES += main.cpp \
     engine.cpp \
-    compiler.cpp \
     CompilationObject.cpp \
     runes/Rune_X.cpp \
     runes/Rune_C.cpp \
@@ -23,11 +22,12 @@ SOURCES += main.cpp \
     runetala.cpp \
     runes/Data_Rune.cpp \
     runes/Action_Rune.cpp \
-    runes/Param_Rune.cpp
+    runes/Param_Rune.cpp \
+    Compiler.cpp \
+    pseudo_compilated/runetala_base.cpp
 
 HEADERS += \
     engine.h \
-    compiler.h \
     CompilationObject.h \
     runes/Rune_X.h \
     runes/Rune_C.h \
@@ -43,7 +43,11 @@ HEADERS += \
     runetala.h \
     runes/Data_Rune.h \
     runes/Action_Rune.h \
-    runes/Param_Rune.h
+    runes/Param_Rune.h \
+    runes/all.h \
+    Compiler.h \
+    settings.h \
+    pseudo_compilated/runetala_base.h
 
 
 win32{

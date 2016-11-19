@@ -30,10 +30,20 @@
  *
  */
 
-#include "Rune_X.h"
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
-runetala::Rune_X::Rune_X()
+#include<iostream>
+
+//debug macros
+#define D(X) std::cerr << X << std::endl;
+#define PRE  std::cerr << "PRE" << std::endl;
+#define POST std::cerr << "POST" << std::endl;
+
+namespace settings
 {
-
+	extern bool flag_verbose;
+		#define VERBOSE(X) if(settings::flag_verbose) X;
 }
 
+#endif // SETTINGS_H

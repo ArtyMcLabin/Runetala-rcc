@@ -36,11 +36,12 @@
 #include"rune_common.h"
 #include"runes/Data_Rune.h"
 
-class runetala::Rune_X : runetala::Data_Rune
+class runetala::Rune_X : public runetala::Data_Rune
 {
 
+
 public:
-	Rune_X(unsigned long long length_in_bytes);
+	Rune_X();
 
 };
 

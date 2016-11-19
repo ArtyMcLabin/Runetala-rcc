@@ -37,34 +37,34 @@
 
 CompilationObject::CompilationObject(string _path_to_rune)
 {
-	//check ".rune" format
-	if(!isDotRuneFile(_path_to_rune)){
-		cerr << "\"" << _path_to_rune << "\" is not a \".rune\" file" << endl;
-		throw this;
-	}
+    //check ".rune" format
+    if(!isDotRuneFile(_path_to_rune)){
+        cerr << "\"" << _path_to_rune << "\" is not a \".rune\" file" << endl;
+        throw this;
+    }
 
-	//check file is available (exists, visible etc..)
-	ifstream source(_path_to_rune);
-	if(!source){
-		cerr << "\"" << _path_to_rune << "\" unavailable" << endl;
-		throw this;
-	}else{
-		VERBOSE(cout << "opened \"" << _path_to_rune << "\"" << endl;)
-		path_to_rune = _path_to_rune;
-	}
+    //check file is available (exists, visible etc..)
+    ifstream source(_path_to_rune);
+    if(!source){
+        cerr << "\"" << _path_to_rune << "\" unavailable" << endl;
+        throw this;
+    }else{
+        VERBOSE(cout << "opened \"" << _path_to_rune << "\"" << endl;)
+        path_to_rune = _path_to_rune;
+    }
 
-	//get name
-        string without_path = engine::withoutPath(path_to_rune);
-	name = without_path.substr(0,without_path.find_last_of("."));
+    //get name
+    string without_path = engine::withoutPath(path_to_rune);
+    name = without_path.substr(0,without_path.find_last_of("."));
 
-	//get root path
-        path_root = engine::pathOnly(path_to_rune);
+    //get root path
+    path_root = engine::pathOnly(path_to_rune);
 
-	//get path to ".cpp" (getting created later)
-	path_to_cpp = path_root+BUILD_CPP_DIR+name+".cpp";
+    //get path to ".cpp" (getting created later)
+    path_to_cpp = path_root+BUILD_CPP_DIR+name+".cpp";
 
-	//get path to executable (getting created later)
-	path_to_exe = path_root+BUILD_EXE_DIR+name+EXECUTABLE_EXTENSION;
+    //get path to executable (getting created later)
+    path_to_exe = path_root+BUILD_EXE_DIR+name+EXECUTABLE_EXTENSION;
 }
 
 bool CompilationObject::isDotRuneFile(string filename)

@@ -36,7 +36,7 @@
 #include"rune_common.h"
 #include"runes/Param_Rune.h"
 
-class runetala::Rune_A : runetala::Param_Rune
+class runetala::Rune_A : public runetala::Param_Rune
 {
 
 public:

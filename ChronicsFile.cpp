@@ -41,8 +41,8 @@ ChronicsFile::ChronicsFile(string _path_to_chr)
 	}
 
 	//check file is available (exists, visible etc..)
-	ifstream source(_path_to_chr);
-	if(!source){
+	stream = ifstream(_path_to_chr);
+	if(!stream){
 		cerr << "\"" << _path_to_chr << "\" unavailable" << endl;
 		throw this;
 	}else{

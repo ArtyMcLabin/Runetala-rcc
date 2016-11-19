@@ -35,20 +35,22 @@
 
 #include"rune_common.h"
 
+//abstract class
 class runetala::Data_Rune
 {
 
-protected:
-	Byte* value;
-
 public:
+	std::string value;
+	std::string name;
+	int size;
+
 	Data_Rune();
 
-	template<typename T>
-	Data_Rune operator=(T x){
-		value = toBytes(x);
-		return *this;
-	}
+//	template<typename T>
+//	Data_Rune operator=(T x){
+//		value = toBytes(x);
+//		return *this;
+//	}
 };
 
 #endif // DATA_RUNE_H

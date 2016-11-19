@@ -30,10 +30,5 @@
  *
  */
 
-#include "Rune_X.h"
-
-runetala::Rune_X::Rune_X()
-{
-
-}
+#include"runetala_base.h"
 

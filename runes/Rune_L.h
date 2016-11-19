@@ -36,11 +36,16 @@
 #include"rune_common.h"
 #include"runes/Action_Rune.h"
 
-class runetala::Rune_L : runetala::Action_Rune
+class runetala::Rune_L : public runetala::Action_Rune
 {
 
 public:
 	Rune_L();
+
+	//void apply(runetala::Param_Rune param);
+	//void operator()();
+	std::string translate();
+
 };
 
 #endif // RUNE_L_H

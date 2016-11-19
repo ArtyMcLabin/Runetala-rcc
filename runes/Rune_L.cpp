@@ -36,3 +36,14 @@ runetala::Rune_L::Rune_L()
 {
 
 }
+
+std::string runetala::Rune_L::translate()
+{
+
+}
+
+//void runetala::Rune_L::operator()()
+//{
+
+//}
+

@@ -36,7 +36,7 @@
 #include"rune_common.h"
 #include"runes/Data_Rune.h"
 
-class runetala::Rune_C : runetala::Data_Rune
+class runetala::Rune_C : public runetala::Data_Rune
 {
 
 public:

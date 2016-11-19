@@ -37,3 +37,8 @@ runetala::Rune_O::Rune_O()
 
 }
 
+std::string runetala::Rune_O::translate()
+{
+
+}
+

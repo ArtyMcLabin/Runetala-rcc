@@ -36,9 +36,12 @@
 #include<iostream>
 #include<fstream>
 #include<algorithm>
+
+#include"settings.h"
 #include"CompilationObject.h"
 #include"ChronicsFile.h"
-#include"compiler.h"
+#include"Compiler.h"
+
 
 #ifdef ON_WINDOWS
 	#include<conio.h>
@@ -48,12 +51,6 @@
 
 using namespace std;
 
-//debug macros
-#define D(X) cerr << X << endl;
-#define PRE  cerr << "PRE" << endl;
-#define POST cerr << "POST" << endl;
-
-
 class CompilationObject;
 class ChronicsFile;
 
@@ -62,24 +59,23 @@ namespace engine
 	extern vector<CompilationObject*> cobjects;
 	extern vector<ChronicsFile*> dot_chr_files;
 	extern string custom_cpp_params;
-	extern bool flag_verbose;
-		#define VERBOSE(X) if(engine::flag_verbose) X;
+
 
 	void abort(string message, int error_code);
 	void parseArgs(vector<string> &args);
 	int tryCompile(CompilationObject *co); //@
 	void askToRun(string path_to_exe);
 
-	//file works
+	// file/format works
 	void ensureDir(string dir);
 	string withFrontSlashes(string path); //replace microsoft directory backslashes with valid.
 	string withoutPath(string filename);
 	string pathOnly(string filename);
-
-	#ifdef ON_WINDOWS
+#ifdef ON_WINDOWS
 	string withBackSlashes(string path); //replace valid directory slashes with microsoft backslashes.
-	#elif defined ON_UNIX
-	#endif
+#elif defined ON_UNIX
+	//nothing special needed yet
+#endif
 
 	char getChar(); //crossplatform getch()
 
@@ -87,7 +83,7 @@ namespace engine
 	namespace privates
 	{
 		int generateCpp(CompilationObject *co); // Runetala -> C++
-		int compile(CompilationObject* co); // C++ -> machine code
+		int compileCpp(CompilationObject* co); // C++ -> machine code
 	}
 
 }

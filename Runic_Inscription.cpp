@@ -41,3 +41,11 @@ void runetala::Runic_Inscription::addSubInscription(runetala::Runic_Inscription 
 {
 	sub_inscriptions.push_back(&sub);
 }
+
+string Runic_Inscription::translate()
+{
+	for(Runic_Inscription* sub : sub_inscriptions){
+		sub->translate();
+	}
+	head_action->translate();
+}

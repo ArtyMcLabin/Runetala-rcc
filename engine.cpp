@@ -37,7 +37,6 @@ string engine::custom_cpp_params = "";
 vector<CompilationObject*> engine::cobjects;
 vector<ChronicsFile*> engine::dot_chr_files;
 
-bool engine::flag_verbose = 1;
 
 
 void engine::abort(string message = "compiler aborted.", int error_code = -1)
@@ -54,7 +53,7 @@ int engine::tryCompile(CompilationObject* co)
 
 	if((error_code=privates::generateCpp(co)))
 		return error_code;
-	if((error_code=privates::compile(co)))
+	if((error_code=privates::compileCpp(co)))
 		return error_code;
 
 	return 0;
@@ -79,7 +78,12 @@ int engine::privates::generateCpp(CompilationObject* co)
 	"#include<iostream>"				<< endl <<
 	"int main(){"						<< endl;
 
-	compiler::translate(src,cpp); //actual Runetala->C++ processing
+
+	Compiler compiler(src,cpp);
+	for(ChronicsFile* chr : dot_chr_files){
+		compiler.loadChronic(chr->stream, chr->path_to_chr);
+	}
+	compiler.translate(); //actual Runetala->C++ processing
 
 	cpp <<
 	"}"									<< endl;
@@ -90,7 +94,7 @@ int engine::privates::generateCpp(CompilationObject* co)
 
 
 
-int engine::privates::compile(CompilationObject *co)
+int engine::privates::compileCpp(CompilationObject *co)
 {
 	VERBOSE(cout << "starting compilation of \"" << co->name << "\"" << endl;)
 
@@ -114,18 +118,19 @@ void engine::askToRun(string path_to_exe)
 {
 	cout << "would you like to launch it? (y/n)" << endl;
 
-		while(char option = getChar())
+	while(char option = getChar())
+	{
+		switch(option)
 		{
-			switch(option)
-			{
-			#ifdef ON_WINDOWS
-				case 'y':system(withBackSlashes(path_to_exe).c_str());
-			#elif defined ON_UNIX
-				case 'y':system(((string)"./"+path_to_exe).c_str());
-			#endif
-				case 'n':goto out_of_while;
-			}
-		}out_of_while: return;
+		#ifdef ON_WINDOWS
+			case 'y':system(withBackSlashes(path_to_exe).c_str());
+		#elif defined ON_UNIX
+			case 'y':system(((string)"./"+path_to_exe).c_str());
+		#endif
+			case 'n':goto out_of_while;
+		}
+	}out_of_while:
+	return;
 }
 
 void engine::ensureDir(string dir)

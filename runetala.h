@@ -58,7 +58,7 @@ namespace runetala
 		class Rune_L; //  lambda
 		class Rune_R; //  repeat (loop)
 
-	class Param_Rune;//abstract class
+	class Param_Rune; //abstract class
 		class Rune_A; //  all (whole) (until end)
 
 	class Rune_N; //  and

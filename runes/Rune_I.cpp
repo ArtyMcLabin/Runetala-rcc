@@ -34,6 +34,29 @@
 
 runetala::Rune_I::Rune_I()
 {
-
+	file="stdin";
 }
+
+std::string runetala::Rune_I::translate()
+{
+	return "read("+file+"," +target->name +","+std::to_string(target->size)+");";
+}
+
+//void runetala::Rune_I::apply(runetala::Param_Rune param)
+//{
+//	//+
+
+//	//- if param == R5
+//		count = [](){return 5};
+//}
+
+//vector<Byte>* runetala::Rune_I::operator()()
+//{
+//	vector<Byte>* bytes = new vector<Byte>;
+//	for(int i=0; i< count(); i++){
+//		bytes->push_back(getChar());
+//	}
+//	return bytes;
+//}
+
 

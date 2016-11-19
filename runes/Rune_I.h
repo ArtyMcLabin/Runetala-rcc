@@ -33,15 +33,29 @@
 #ifndef RUNE_I_H
 #define RUNE_I_H
 
+//#include<functional>
+
 #include"rune_common.h"
 #include"runes/Action_Rune.h"
+#include"runes/Data_Rune.h"
 
-class runetala::Rune_I : runetala::Action_Rune
+using namespace runetala;
+
+class runetala::Rune_I : public runetala::Action_Rune
 {
+
+//std::function<int()> count = [](){return 0;};
+
+	Data_Rune* target;
+
+	std::string file;
+
 
 public:
 	Rune_I();
-
+	//void apply(runetala::Param_Rune param);
+	//vector<Byte>* operator()();
+	std::string translate();
 };
 
 #endif // RUNE_I_H

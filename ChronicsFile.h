@@ -42,7 +42,7 @@ using namespace std;
 struct ChronicsFile
 {
 	string path_to_chr; //ex: "test/georg.chr"
-
+	ifstream stream;
 	ChronicsFile(string _path_to_chr);
 
 	static bool isDotChrFile(string filename);

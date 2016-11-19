@@ -35,30 +35,36 @@
 
 #include<iostream>
 #include<fstream>
+#include<string>
 #include<map>
-#include"runes/Rune_X.h"
-#include"runes/Rune_C.h"
-#include"runes/Rune_I.h"
-#include"runes/Rune_O.h"
-#include"runes/Rune_A.h"
-#include"runes/Rune_N.h"
-#include"runes/Rune_R.h"
-#include"runes/Rune_L.h"
+
+#include"settings.h"
+#include"runes/all.h"
+#include"Runic_Inscription.h"
 
 
 
 
 using namespace std;
 
-
-namespace compiler
+//implemented as a class to support multithreading (parallel compilation)
+class Compiler
 {
-	extern vector<runetala::Rune_X> X_runes;
-	extern vector<runetala::Rune_C> C_runes;
-	extern vector<runetala::Rune_L> L_runes;
+    ifstream* src;
+    ofstream* cpp;
+
+    vector<runetala::Rune_X> X_runes;
+    vector<runetala::Rune_C> C_runes;
+    vector<runetala::Rune_L> L_runes;
+    vector<runetala::Runic_Inscription> inscriptions; //ordered imperatively
 
 
-	void translate(ifstream &src, ofstream &cpp); //Runetala->C++
-}
+
+public:
+    Compiler(ifstream &_src, ofstream &_cpp);
+
+    void loadChronic(ifstream &chronic, string filename); //fill rune vectors from .chr file
+    void translate(); //Runetala->C++
+};
 
 #endif // COMPILER_H

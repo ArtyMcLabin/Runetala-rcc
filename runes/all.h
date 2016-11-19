@@ -30,10 +30,16 @@
  *
  */
 
-#include "Rune_X.h"
+#ifndef ALL_H
+#define ALL_H
 
-runetala::Rune_X::Rune_X()
-{
+#include"runes/Rune_X.h"
+#include"runes/Rune_C.h"
+#include"runes/Rune_I.h"
+#include"runes/Rune_O.h"
+#include"runes/Rune_A.h"
+#include"runes/Rune_N.h"
+#include"runes/Rune_R.h"
+#include"runes/Rune_L.h"
 
-}
-
+#endif // ALL_H

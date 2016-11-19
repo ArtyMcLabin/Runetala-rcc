@@ -35,11 +35,20 @@
 
 #include"rune_common.h"
 
+//abstract class
 class runetala::Action_Rune
 {
 
+
+
+
 public:
 	Action_Rune();
+
+	//do the action
+	//virtual void apply(runetala::Param_Rune param)=0;
+	//virtual void operator()()=0;
+	virtual std::string translate()=0;
 };
 
 #endif // ACTION_RUNE_H

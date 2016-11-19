@@ -30,10 +30,14 @@
  *
  */
 
-#include "Rune_X.h"
+#ifndef RUNETALA_BASE_H
+#define RUNETALA_BASE_H
 
-runetala::Rune_X::Rune_X()
-{
+typedef char Byte;
 
+template<typename T>
+Byte* toBytes(T* x){
+	return static_cast<Byte*>(x);
 }
 
+#endif

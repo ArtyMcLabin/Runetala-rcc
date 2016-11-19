@@ -36,19 +36,22 @@
 #include<iostream>
 #include<vector>
 #include"runetala.h"
+#include"runes/all.h"
+
 
 using namespace std;
+using namespace runetala;
 
 class runetala::Runic_Inscription
 {
-
+	Action_Rune* head_action;
 	vector<Runic_Inscription*> sub_inscriptions;
 
 public:
 	Runic_Inscription();
 
 	void addSubInscription(Runic_Inscription &sub);
-
+	string translate();
 };
 
 #endif // RUNIC_INSCRIPTION_H

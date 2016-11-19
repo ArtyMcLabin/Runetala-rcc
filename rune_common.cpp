@@ -32,7 +32,4 @@
 
 #include "rune_common.h"
 
-Byte* toBytes(void* x)
-{
-	return static_cast<Byte*>(x);
-}
+
